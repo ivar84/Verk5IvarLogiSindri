@@ -15,7 +15,6 @@ namespace MvcApplication5.Controllers
     {
         //
         // GET: /Account/Index
-
         public ActionResult Index()
         {
             return View();
