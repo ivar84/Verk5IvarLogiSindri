@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="LectureApp">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -8,7 +8,12 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    @RenderBody()
+	<script src="http://code.angularjs.org/1.0.6/angular.min.js"></script>
+	<script src="~/Scripts/App.js"></script>
+	<script src="~/Scripts/LecturesController.js"></script>
+	<script src="http://code.angularjs.org/1.0.6/angular-resource.js"></script>
+
+	@RenderBody()
 
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
