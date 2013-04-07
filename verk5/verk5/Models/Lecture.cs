@@ -10,6 +10,5 @@ namespace verk5.Models
         public int ID { get; set; }
         public string LectureURL { get; set; }
         public DateTime DatePublished { get; set; }
-
     }
 }

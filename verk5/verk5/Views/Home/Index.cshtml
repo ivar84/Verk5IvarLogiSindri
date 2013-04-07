@@ -8,7 +8,9 @@
 </header>
 
 <div ng-controller="LecturesController">
-	<p>{{name}}</p>
+	<li ng-repeat="lecture in lectures">
+		<span>{{lectures.LectureURL}}:&nbsp</span><p>{{lectures.DatePublished}}</p>
+	</li>
 </div>
 
 <div id="body">
