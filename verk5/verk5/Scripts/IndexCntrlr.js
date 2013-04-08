@@ -48,12 +48,13 @@
 //		$scope.$apply(function()
 //		{
 		console.log("selecting a lecture", lectureURL);
-		if(!$scope.$$phase) {
+		//if(!$scope.$$phase) {
 			//$digest or $apply
 			$scope.$apply(function(){
 				$scope.nowPlaying = lectureURL;
+				console.log("now playing" + $scope.nowPlaying);
 			});
-		}	
+		//}	
 
 //		});
 	};
