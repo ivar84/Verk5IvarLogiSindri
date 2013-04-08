@@ -43,7 +43,7 @@ namespace verk5.Controllers
             string CommentText = c.CommentText;
             c.DatePublished = DateTime.Now;
             c.UserName = User.Identity.Name;
-            int id = c.Lecture.ID;
+
 
             db.Comments.Add(c);
             db.SaveChanges();

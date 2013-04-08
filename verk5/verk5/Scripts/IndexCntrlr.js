@@ -4,19 +4,11 @@
 	$scope.Comments = [];
 	$scope.nowPlaying = '';
 	$scope.currentID = 0;
-
-	$scope.$watch('nowPlaying', function () {
-		console.log('watch!');
-	});
-
-	console.log('halló ' + $scope.name);
+	$scope.showComments = false;
 
 	var Lectures = $resource('/api/v1/lectures');
 
-//	var Comments = $resource('api/v1/Lectures/'+id+'/Comment');
-
 	var lectures = Lectures.query(function () {
-//		console.log("fyrsti lecturinn : " + lectures[0].LectureURL);
 		$scope.Lectures = lectures;
 		lectures.$save;
 
@@ -24,18 +16,23 @@
 		$scope.currentID = lectures[0].ID;
 	});
 
-	var commentlist = [];
-
 	$scope.getComments = function (currentID) {
 		var Comments = $resource('api/v1/Lectures/' + $scope.currentID + '/Comment');
 		var comments = Comments.query(function () {
-			for (comment in comments) {
-				console.log("fyrsta comment : " + comments[0].CommentText);
-			}
-			console.log("current id: " + $scope.currentID);
+
+			$scope.showComments = true;
+
+			console.log('showcomments: ' + $scope.showComments);
+
 			$scope.Comments = comments;
 			comments.$save;
 		});
+	}
+
+	$scope.hideComments = function () {
+
+		$scope.showComments = false;
+		console.log('showcomments: ' + $scope.showComments);
 	}
 	
 	$scope.newLecture = function () {
@@ -46,22 +43,18 @@
 
 	}
 	$scope.newComment = function () {
+	    console.log("eg komst whoop whoop ");
 	    var Comments = $resource('api/v1/Lectures/' + $scope.currentID + '/Comment');
 	    var comment1 = new Comments();
 		comment1.CommentText = $scope.Commenttxt;
 		comment1.Lecture_ID = $scope.currentID;
 		comment1.$save();
-	}
+
+	};
 
 	$scope.selectLecture = function (lectureURL, lectureID) {
-//		$scope.$apply(function()
-//		{
-		console.log("selecting a lecture", lectureURL);
 		$scope.nowPlaying = lectureURL;
-		console.log("now playing " + $scope.nowPlaying);
-		console.log("id: " + lectureID);
 		$scope.currentID = lectureID;
-		console.log("current id: " + $scope.currentID);
 		$scope.getComments();
 	};
 }]);
