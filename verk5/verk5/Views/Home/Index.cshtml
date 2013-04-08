@@ -11,7 +11,7 @@
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
-                <h1>Welcome to kennara single-page app!</h1><br />
+                <h1>Welcome to kennara single-page app!</h1><br/>
                 <h2>Modify the code in this template to jump-start your ASP.NET Web API development.</h2>
             </hgroup>
             <p>
@@ -32,9 +32,11 @@
 		
 		<div id="player" ng-model="nowPlaying">
 			<iframe width="560" height="380" src="{{nowPlaying}}"></iframe><br />
-			<button type="submit" ng-model="checked" ng-click="getComments(currentID)">Show comments</button>
+			<label>Comment:</label><input type="text" ng-model="text"/><button type="submit" ng-click="Newcomment()">Send</button><br />
 
-			<ol class="round">
+			<button type="submit" ng-model="checked" ng-hide="showComments" ng-click="getComments(currentID)">Show comments</button>
+			<button ng-hide="!showComments" ng-click="hideComments()">Hide Comments</button>
+			<ol class="round" ng-hide="!showComments">
 				<li ng-repeat="comment in Comments">
 					<p>{{comment.CommentText}}</p>
 				</li>
