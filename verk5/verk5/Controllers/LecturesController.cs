@@ -55,22 +55,17 @@ namespace verk5.Controllers
         }
         //  [Authorize(Roles = "Teachers")]
         // POST api/lecture
-        public HttpResponseMessage Post(Lecture l)
+        public void Post(Lecture l)
         {
             AppDataContext db = new AppDataContext();
-            if (ModelState.IsValid)
-            {
-                db.Lectures.Add(l);
-                db.SaveChanges();
+            string lectureURL = l.LectureURL;
+            l.DatePublished = DateTime.Now;
+            string title = l.Title;
+            l.LectureOwner = User.Identity.Name;
+            db.Lectures.Add(l);
+            db.SaveChanges();
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, l);
-                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = l.ID }));
-                return response;
-            }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
-            }
+
         }
       
       //  [Authorize(Roles = "Teachers")]

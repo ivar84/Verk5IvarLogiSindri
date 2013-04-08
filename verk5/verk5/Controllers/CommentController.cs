@@ -36,8 +36,18 @@ namespace verk5.Controllers
         //}
 
         // POST api/comment
-        public void Post([FromBody]string value)
+        public void Post(int id, Comment c)
         {
+            AppDataContext db = new AppDataContext();
+
+            string CommentText = c.CommentText;
+            c.DatePublished = DateTime.Now;
+            c.UserName = User.Identity.Name;
+            c.Lecture.ID = id;
+
+            db.Comments.Add(c);
+            db.SaveChanges();
+
         }
 
         // PUT api/comment/5
