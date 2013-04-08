@@ -45,9 +45,11 @@
 		lecture1.$save();
 
 	}
-	$scope.Newcomment = function () {
-		var comment1 = new Comment();
+	$scope.newComment = function () {
+	    var Comments = $resource('api/v1/Lectures/' + $scope.currentID + '/Comment');
+	    var comment1 = new Comments();
 		comment1.CommentText = $scope.Commenttxt;
+		comment1.Lecture_ID = $scope.currentID;
 		comment1.$save();
 	}
 
@@ -60,5 +62,6 @@
 		console.log("id: " + lectureID);
 		$scope.currentID = lectureID;
 		console.log("current id: " + $scope.currentID);
+		$scope.getComments();
 	};
 }]);
