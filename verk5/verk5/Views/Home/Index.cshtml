@@ -30,20 +30,16 @@
     </section>
     <section class="content-wrapper main-content clear-fix">
 		
-		<div id="player" ng-controller="IndexCntrlr">
+		<div id="player" ng-model="nowPlaying">
 			<iframe width="560" height="380" src="{{nowPlaying}}"></iframe><br />
-			<button>Show comments</button>
+			<button type="submit" ng-click="getComments(currentID)">Show comments</button>
 		</div>
 
 		<div id="list" class="float-left">
 			<h3>Hér kemur listi yfir fyrirlestra:</h3>
 			<ol class="round">
 				<li ng-repeat="lecture in Lectures">
-					<h5><a href="" ng-click="selectLecture(lecture.LectureURL)">{{lecture.Title}}</a></h5>
-<!--					<input type="text"/>{{lecture.ID}}
-						href="lecture/{{lecture.ID}}"
-					<button>{{lecture.Title}}</button>
--->
+					<h5><a href="" ng-click="selectLecture(lecture.LectureURL, lecture.ID)">{{lecture.Title}}</a></h5>
 				</li>
 			</ol>
 		</div>

@@ -3,6 +3,11 @@
 	$scope.Lectures = [];
 	$scope.Comments = [];
 	$scope.nowPlaying = '';
+	$scope.currentID = 0;
+
+	$scope.$watch('nowPlaying', function () {
+		console.log('watch!');
+	});
 
 	console.log('halló ' + $scope.name);
 
@@ -20,12 +25,13 @@
 
 	var commentlist = [];
 
-	$scope.getComments = function (id) {
-		var Comments = $resource('api/v1/Lectures/'+id+'/Comment');
+	$scope.getComments = function (currentID) {
+		var Comments = $resource('api/v1/Lectures/' + $scope.currentID + '/Comment');
 		var comments = Comments.query(function () {
 			for (comment in comments) {
 				console.log("fyrsta comment : " + comments[0].CommentText);
 			}
+			console.log("current id: " + $scope.currentID);
 			$scope.Comments = comments;
 			comments.$save;
 		});
@@ -44,19 +50,14 @@
 		comment1.$save();
 	}
 
-	$scope.selectLecture = function (lectureURL) {
+	$scope.selectLecture = function (lectureURL, lectureID) {
 //		$scope.$apply(function()
 //		{
 		console.log("selecting a lecture", lectureURL);
-		//if(!$scope.$$phase) {
-			//$digest or $apply
-			$scope.$apply(function(){
-				$scope.nowPlaying = lectureURL;
-				console.log("now playing" + $scope.nowPlaying);
-			});
-		//}	
-
-//		});
+		$scope.nowPlaying = lectureURL;
+		console.log("now playing " + $scope.nowPlaying);
+		console.log("id: " + lectureID);
+		$scope.currentID = lectureID;
+		console.log("current id: " + $scope.currentID);
 	};
-	console.log("lectures ", lectures);
 }]);
