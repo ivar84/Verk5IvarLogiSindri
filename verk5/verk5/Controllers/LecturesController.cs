@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Security;
 using verk5.Models;
+
+
 namespace verk5.Controllers
 {
     public class LecturesController : ApiController
@@ -53,8 +55,22 @@ namespace verk5.Controllers
         }
         //  [Authorize(Roles = "Teachers")]
         // POST api/lecture
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post(Lecture l)
         {
+            AppDataContext db = new AppDataContext();
+            if (ModelState.IsValid)
+            {
+                db.Lectures.Add(l);
+                db.SaveChanges();
+
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, l);
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = l.ID }));
+                return response;
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
         }
       
       //  [Authorize(Roles = "Teachers")]
