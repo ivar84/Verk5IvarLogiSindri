@@ -32,7 +32,13 @@
 		
 		<div id="player" ng-model="nowPlaying">
 			<iframe width="560" height="380" src="{{nowPlaying}}"></iframe><br />
-			<button type="submit" ng-click="getComments(currentID)">Show comments</button>
+			<button type="submit" ng-model="checked" ng-click="getComments(currentID)">Show comments</button>
+
+			<ol class="round">
+				<li ng-repeat="comment in Comments">
+					<p>{{comment.CommentText}}</p>
+				</li>
+			</ol>
 		</div>
 
 		<div id="list" class="float-left">

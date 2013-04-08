@@ -21,6 +21,7 @@
 		lectures.$save;
 
 		$scope.nowPlaying = lectures[0].LectureURL;
+		$scope.currentID = lectures[0].ID;
 	});
 
 	var commentlist = [];
