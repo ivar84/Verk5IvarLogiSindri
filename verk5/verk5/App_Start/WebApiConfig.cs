@@ -15,7 +15,7 @@ namespace verk5
 			config.Formatters.Remove(config.Formatters.XmlFormatter);
 
 			config.Routes.MapHttpRoute(
-				name: "GetLectures",
+				name: "GetComments",
 				routeTemplate: "api/v1/lectures/{LectureID}/{controller}",
 				defaults: new { controller = "CommentController" }
 			);

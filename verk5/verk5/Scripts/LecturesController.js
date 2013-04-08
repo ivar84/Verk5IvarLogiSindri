@@ -16,7 +16,7 @@
     
     var Comments = $resource('api/v1/Lectures/1/Comment');
 
-    $scope.getLectures = function () {
+    
         var lectures = Lectures.query(function () {
             console.log("fyrsti lecturinn : " + lectures[0].LectureURL);
             $scope.nameLectures = lectures;
@@ -27,14 +27,14 @@
             console.log("þetta er skóp gæjinn : " + $scope.nameLectures[0].Title);
 
         });
-    }
+ 
 
     $scope.newLecture = function () {
         var lecture1 = new Lectures();
         lecture1.LectureURL = $scope.URL;
         lecture1.Title = $scope.Title;
         lecture1.$save();
-        getLectures();
+        
     }
     $scope.Newcomment = function () {
         var comment1 = new Comment();

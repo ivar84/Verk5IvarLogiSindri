@@ -8,8 +8,8 @@ namespace verk5.Models
     public class Lecture
     {
         public int ID { get; set; }
-        public string Title { get; set; }
-        public string LectureOwner { get; set;}
+		public string Title { get; set; }
+		public string LectureOwner { get; set; }
         public string LectureURL { get; set; }
         public DateTime DatePublished { get; set; }
     }

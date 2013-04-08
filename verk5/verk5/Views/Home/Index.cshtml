@@ -7,27 +7,23 @@
     </div>
 </header>
 
+<!--
 <div ng-controller="LecturesController">
-	<li ng-repeat="lecture in nameLectures">
+	<li ng-repeat="lecture in Lectures">
 		<span>{{lecture.LectureURL}}:&nbsp</span><p>{{lecture.DatePublished}}</p>
 	</li>
 
-
-    <li ng-repeat="comments in nameComments">
+    <li ng-repeat="comments in Comments">
 		<span>{{comments.CommentText}}:&nbsp</span><p>{{comments.LectureID}}</p>
 	</li>
-   
-    Title:<input type="text" ng-model="Title"><br />
-    Video URL:<input type="text" ng-model="URL"><br />
-    <button type="submit" ng-click="newLecture()" >Submit</button>
-
 </div>
+-->
 
-<div id="body">
+<div id="body" ng-controller="IndexCntrlr">
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
-                <h1>Welcome to ASP.NET Web API!</h1>
+                <h1>Welcome to kennara single-page app!</h1><br />
                 <h2>Modify the code in this template to jump-start your ASP.NET Web API development.</h2>
             </hgroup>
             <p>
@@ -44,27 +40,37 @@
         </div>
     </section>
     <section class="content-wrapper main-content clear-fix">
-        <h3>We suggest the following steps:</h3>
+        <h3>Hér kemur listi yfir fyrirlestra:</h3>
         <ol class="round">
-            <li class="one">
-                <h5>Getting Started</h5>
-                ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
+            <li ng-repeat="lecture in Lectures">
+                <h5><a href="lecture/{{lecture.ID}}">{{lecture.Title}}</a></h5>
+				<iframe width="280" height="190" src="{{lecture.LectureURL}}"></iframe>
+<!--                ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
                 a broad range of clients, including browsers and mobile devices. ASP.NET Web API
                 is an ideal platform for building RESTful applications on the .NET Framework.
                 <a href="http://go.microsoft.com/fwlink/?LinkId=245160">Learn more…</a>
-            </li>
 
+				<li ng-repeat="comments in Comments">
+					<span>{{comments.CommentText}}:&nbsp</span><p>{{comments.LectureID}}</p>
+				</li>
+-->
+            </li>
+<!--
             <li class="two">
-                <h5>Add NuGet packages and jump-start your coding</h5>
+                <h5>Fyrirlestur 2</h5>
                 NuGet makes it easy to install and update free libraries and tools.
                 <a href="http://go.microsoft.com/fwlink/?LinkId=245161">Learn more…</a>
             </li>
             <li class="three">
-                <h5>Find Web Hosting</h5>
+                <h5>Fyrirlestur 3</h5>
                 You can easily find a web hosting company that offers the right mix of features
                 and price for your applications.
                 <a href="http://go.microsoft.com/fwlink/?LinkId=245164">Learn more…</a>
             </li>
+-->
         </ol>
+		Title:<input type="text" ng-model="Title"><br />
+	    Video URL:<input type="text" ng-model="URL"><br />
+	    <button type="submit" ng-click="newLecture()" >Submit</button>
     </section>
 </div>
