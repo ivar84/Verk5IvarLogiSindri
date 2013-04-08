@@ -36,6 +36,14 @@ nav, section {
     display: block;
 }
 
+#list {
+
+}
+
+#player{
+	float: right;
+}
+
 mark {
     background-color: #a6dbed;
     padding-left: 5px;

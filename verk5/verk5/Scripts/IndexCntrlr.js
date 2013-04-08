@@ -2,6 +2,7 @@
 	$scope.name = "Sindri sindri";
 	$scope.Lectures = [];
 	$scope.Comments = [];
+	$scope.nowPlaying = '';
 
 	console.log('halló ' + $scope.name);
 
@@ -13,20 +14,23 @@
 //		console.log("fyrsti lecturinn : " + lectures[0].LectureURL);
 		$scope.Lectures = lectures;
 		lectures.$save;
+
+		$scope.nowPlaying = lectures[0].LectureURL;
 	});
 
 	var commentlist = [];
 
-	var Comments = $resource('api/v1/Lectures/1/Comment');
-	var comments = Comments.query(function () {
-		for (comment in comments)
-		{
-			console.log("fyrsta comment : " + comments[0].CommentText);//[0].CommentText);
-		}
-		$scope.Comments = comments;
-		comments.$save;
-	});
-
+	$scope.getComments = function (id) {
+		var Comments = $resource('api/v1/Lectures/'+id+'/Comment');
+		var comments = Comments.query(function () {
+			for (comment in comments) {
+				console.log("fyrsta comment : " + comments[0].CommentText);
+			}
+			$scope.Comments = comments;
+			comments.$save;
+		});
+	}
+	
 	$scope.newLecture = function () {
 		var lecture1 = new Lectures();
 		lecture1.LectureURL = $scope.URL;
@@ -40,5 +44,18 @@
 		comment1.$save();
 	}
 
+	$scope.selectLecture = function (lectureURL) {
+//		$scope.$apply(function()
+//		{
+		console.log("selecting a lecture", lectureURL);
+		if(!$scope.$$phase) {
+			//$digest or $apply
+			$scope.$apply(function(){
+				$scope.nowPlaying = lectureURL;
+			});
+		}	
+
+//		});
+	};
 	console.log("lectures ", lectures);
 }]);

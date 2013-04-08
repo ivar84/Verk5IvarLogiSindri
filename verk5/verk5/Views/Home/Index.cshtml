@@ -2,22 +2,10 @@
     <div class="content-wrapper">
         <div class="float-left">
             <p class="site-title">
-                <a href="~/">ASP.NET Web API</a></p>
+                <a href="~/">Single Page Web API</a></p>
         </div>
     </div>
 </header>
-
-<!--
-<div ng-controller="LecturesController">
-	<li ng-repeat="lecture in Lectures">
-		<span>{{lecture.LectureURL}}:&nbsp</span><p>{{lecture.DatePublished}}</p>
-	</li>
-
-    <li ng-repeat="comments in Comments">
-		<span>{{comments.CommentText}}:&nbsp</span><p>{{comments.LectureID}}</p>
-	</li>
-</div>
--->
 
 <div id="body" ng-controller="IndexCntrlr">
     <section class="featured">
@@ -30,47 +18,34 @@
                 ASP.NET Web API allows you to expose your applications, data and services to the
                 web directly over HTTP.
             </p>
-            <p>
-                To learn more about ASP.NET Web API visit
-                <a href="http://go.microsoft.com/fwlink/?LinkID=238195" title="ASP.NET Web API Website">http://asp.net/web-api</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET Web API.
-                If you have any questions about ASP.NET Web API, visit
-                <a href="http://go.microsoft.com/fwlink/?LinkID=238196" title="ASP.NET Web API Forum">our forums</a>.
-            </p>
-        </div>
+			@if(Roles.IsUserInRole("Teacher"))
+			{
+				<p>
+					Title:<input type="text" ng-model="Title"><br />
+					Video URL:<input type="text" ng-model="URL"><br />
+					<button type="submit" ng-click="newLecture()" >Submit</button>
+				</p>
+			}
+	</div>
     </section>
     <section class="content-wrapper main-content clear-fix">
-        <h3>Hér kemur listi yfir fyrirlestra:</h3>
-        <ol class="round">
-            <li ng-repeat="lecture in Lectures">
-                <h5><a href="lecture/{{lecture.ID}}">{{lecture.Title}}</a></h5>
-				<iframe width="280" height="190" src="{{lecture.LectureURL}}"></iframe>
-<!--                ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-                a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-                is an ideal platform for building RESTful applications on the .NET Framework.
-                <a href="http://go.microsoft.com/fwlink/?LinkId=245160">Learn more…</a>
+		
+		<div id="player" ng-controller="IndexCntrlr">
+			<iframe width="560" height="380" src="{{nowPlaying}}"></iframe><br />
+			<button>Show comments</button>
+		</div>
 
-				<li ng-repeat="comments in Comments">
-					<span>{{comments.CommentText}}:&nbsp</span><p>{{comments.LectureID}}</p>
+		<div id="list" class="float-left">
+			<h3>Hér kemur listi yfir fyrirlestra:</h3>
+			<ol class="round">
+				<li ng-repeat="lecture in Lectures">
+					<h5><a href="" ng-click="selectLecture(lecture.LectureURL)">{{lecture.Title}}</a></h5>
+<!--					<input type="text"/>{{lecture.ID}}
+						href="lecture/{{lecture.ID}}"
+					<button>{{lecture.Title}}</button>
+-->
 				</li>
--->
-            </li>
-<!--
-            <li class="two">
-                <h5>Fyrirlestur 2</h5>
-                NuGet makes it easy to install and update free libraries and tools.
-                <a href="http://go.microsoft.com/fwlink/?LinkId=245161">Learn more…</a>
-            </li>
-            <li class="three">
-                <h5>Fyrirlestur 3</h5>
-                You can easily find a web hosting company that offers the right mix of features
-                and price for your applications.
-                <a href="http://go.microsoft.com/fwlink/?LinkId=245164">Learn more…</a>
-            </li>
--->
-        </ol>
-		Title:<input type="text" ng-model="Title"><br />
-	    Video URL:<input type="text" ng-model="URL"><br />
-	    <button type="submit" ng-click="newLecture()" >Submit</button>
+			</ol>
+		</div>
     </section>
 </div>
